@@ -109,6 +109,33 @@
             pageElement.innerHTML = currentPage;
             updateImage();
         }
+		
+		
+		// Add touch support for swipe gestures
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function handleTouchStart(event) {
+            touchStartX = event.touches[0].clientX;
+        }
+
+        function handleTouchMove(event) {
+            touchEndX = event.touches[0].clientX;
+        }
+
+        function handleTouchEnd() {
+            if (touchStartX - touchEndX > 50) {
+                // Swipe left
+                nextPage();
+            } else if (touchEndX - touchStartX > 50) {
+                // Swipe right
+                prevPage();
+            }
+        }
+
+        document.addEventListener("touchstart", handleTouchStart, false);
+        document.addEventListener("touchmove", handleTouchMove, false);
+        document.addEventListener("touchend", handleTouchEnd, false);
 
         function prevPage() {
             currentPage--;
