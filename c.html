@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Navigator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 400px;
+            margin: 10px 0;
+        }
+
+        .controls button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+
+        .info {
+            font-size: 18px;
+            margin: 5px;
+        }
+
+        @media (max-width: 460px) {
+            body {
+                padding: 10px;
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            .controls button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .info {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="./quran_data/images/1/1.qur" alt="Quran page" id="image">
+    <div class="info">Juz: <span id="juz">1</span> | Page: <span id="page">1</span></div>
+
+    <div class="controls">
+        <button onclick="prevPage()">Previous</button>
+        <button onclick="nextPage()">Next</button>
+    <script>
+        const pageElement = document.getElementById("page");
+        const juzElement = document.getElementById("juz");
+        const imageElement = document.getElementById("image");
+
+        let currentPage = parseInt(pageElement.innerHTML);
+        let currentJuz = parseInt(juzElement.innerHTML);
+
+        function updateImage() {
+            imageElement.src = `./quran_data/images/${currentJuz}/${currentPage}.qur`;
+            console.log(`Current path: ${imageElement.src}`);
+        }
+
+        function nextPage() {
+            currentPage++;
+            if (currentPage > 20 && currentJuz !== 1) {
+                currentJuz++;
+                currentPage = 1;
+                juzElement.innerHTML = currentJuz;
+            }
+			else if (currentPage > 21 && currentJuz === 1) {
+                currentJuz++;
+                currentPage = 1;
+                juzElement.innerHTML = currentJuz;
+            }
+            pageElement.innerHTML = currentPage;
+            updateImage();
+        }
+
+        function prevPage() {
+            currentPage--;
+            if (currentPage === 0 && currentJuz !== 1) {
+                currentJuz--;
+                currentPage = 20;
+            } else if (currentPage < 1 && currentJuz === 1) {
+                alert("This is the first page");
+                currentPage = 1;
+            }
+            pageElement.innerHTML = currentPage;
+            juzElement.innerHTML = currentJuz;
+            updateImage();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key.toLowerCase();
+            if (key === "a") {
+                nextPage();
+            } else if (key === "d") {
+                prevPage();
+            } else {
+                console.log(`Key pressed: ${key}`);
+            }
+        });
+    </script>
+</body>
+</html>

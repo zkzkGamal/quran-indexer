@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @media (max-width:460px){
+        #aa{
+            width: 500;
+            height: 1000;
+        }
+}
+    </style>
+</head>
+<body>
+    <img src="../1/1.qur" alt="" id="aa">
+    <span id="aa" style="visibility: hidden;">1</span>
+    <span id="ab" style="opacity:0;">0</span>
+    <script>
+        var ele= document.getElementById("aa");
+        var a = ele.innerHTML;
+        function check(a){
+            if(a == 1 || a<=604){
+                var val = a +1;
+                document.images[0].src = "../images/1/"+val+".qur";
+            }
+        }
+        function nextGozea(){
+            /*var ele2 = document.getElementById("ab");
+            var gozea = ele2.innerHTML;
+            return gozea++;*/
+            
+        }
+        function nextPage(){
+            a++;
+            // we will make an array to save all end of gozea and mak loop to cheack the 
+            // element if he finished the gozea or not 
+            if(a==21){
+                var go = nextGozea();
+                console.log("end of goza in quran"+go)
+                document.images[0].src = "../images/"+go+"/"+a+".qur";
+                ele2.innerHTML = gozea;
+
+            }else{
+                check(a);
+                ele.innerHTML = a;
+            }
+        }
+        function prevPage(){
+            a--;
+            if(a<=-1){
+                alert("there is the first page");
+            }else{
+                ele.innerHTML = a;
+                check(a);
+            }
+        }
+        document.addEventListener('keydown',(event)=>{
+            var x = event.key;
+            if(x=="a" || x == "ش"){
+                nextPage();
+            }else if(x == "d" || x == "ي"){
+                prevPage();
+            }else{
+                console.log(x);
+            }
+            
+        },false);
+        
+    </script>
+</body>
+</html>
+<!-- let ele = document.createElement("div");
+        // let myAtt = document.createAttribute("data-custom");
+        // let text = document.createTextNode("product one")
+
+        // ele.className = "product";
+        // ele.setAttributeNode(myAtt);
+        // ele.setAttribute("data-custom","zkzk");
+
+        // ele.appendChild(text);
+
+        // document.body.appendChild(ele);
+     -->
