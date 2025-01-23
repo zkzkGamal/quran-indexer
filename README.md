@@ -12,4 +12,6 @@ Alerts the user when trying to navigate before the first page.
 User Interface:
 Displays the current Juz and page dynamically.
 Includes two large, easy-to-use navigation buttons for "Previous" and "Next."
-The page image updates as the user navigates.
+The page image updates as the user navigate
+
+### no need to install any thing just click on the html page or the web page and without Internet the magic wii happen
